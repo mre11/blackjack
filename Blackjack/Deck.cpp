@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <ctime>
+#include <assert.h>
 
 using namespace std;
 
@@ -18,10 +19,8 @@ void Deck::shuffle()
 
 Card Deck::deal()
 {
-	if (m_nextCard == m_cards.end())
-		return Card();
-
-	return *m_nextCard++;
+	assert(m_nextCard != m_cards.end());
+	return *(m_nextCard++);
 }
 
 void Deck::reset()

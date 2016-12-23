@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Player::Player()
+Player::Player() : m_handScore(0)
 {
 }
 
@@ -16,7 +16,7 @@ void Player::setScore(int score)
 	m_handScore = score;
 }
 
-void Player::dealCard(Card card)
+void Player::dealCard(Card& card)
 {
 	m_hand.push_back(card);
 }
@@ -28,5 +28,6 @@ const vector<Card>& Player::getHand() const
 
 void Player::resetHand()
 {
+	m_handScore = 0;
 	m_hand.clear();
 }

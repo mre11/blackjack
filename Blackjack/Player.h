@@ -13,7 +13,7 @@ public:
 	int getScore() const;
 	void setScore(int score);
 
-	void dealCard(Card card);
+	void dealCard(Card& card);
 	const std::vector<Card>& getHand() const;
 	void resetHand();
 

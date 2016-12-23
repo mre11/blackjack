@@ -18,10 +18,11 @@ public:
 	void completeRound(); // returns true if the Player wins the game
 
 	Card getDealerShowCard() const;
-	const std::vector<Card>& getPlayerHand(int playerIndex) const;
-	int getPlayerScore(int playerIndex) const;
 	const std::vector<Card>& getDealerHand() const;
+	const std::vector<Card>& getActivePlayerHand() const;
 	int getDealerScore() const;
+	int getActivePlayerScore() const;
+	bool playerWins(int playerIndex);
 
 private:
 	bool hit(Player& player);

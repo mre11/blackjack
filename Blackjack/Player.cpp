@@ -6,6 +6,16 @@ Player::Player()
 {
 }
 
+int Player::getScore() const
+{
+	return m_handScore;
+}
+
+void Player::setScore(int score)
+{
+	m_handScore = score;
+}
+
 void Player::dealCard(Card card)
 {
 	m_hand.push_back(card);

@@ -6,42 +6,43 @@ Blackjack::Blackjack()
 {
 }
 
+void Blackjack::addPlayer()
+{
+	m_players.push_back(Player());
+}
+
 void Blackjack::deal()
 {
 	resetHands();
-
 	reshuffleDeck();
+	m_activePlayer = m_players.begin();
 
-	m_player.dealCard(m_deck.deal());
-	m_dealer.dealCard(m_deck.deal());
-	m_player.dealCard(m_deck.deal());
-	m_dealer.dealCard(m_deck.deal());
+	for (int i = 0; i < 2; i++)
+	{
+		for (auto player : m_players)
+			player.dealCard(m_deck.deal());
+
+		m_dealer.dealCard(m_deck.deal());
+	}
 }
 
 bool Blackjack::hit()
 {
-	return hit(m_player);
+	return hit(*m_activePlayer);
 }
 
-bool Blackjack::hit(Player& player)
+void Blackjack::stay()
 {
-	assert(calculateScore(player) < 22);
+	(*m_activePlayer).setScore(calculateScore(*m_activePlayer));
 
-	player.dealCard(m_deck.deal());
-	return calculateScore(player) < 22;
+	if (!nextPlayer())
+		completeRound();
 }
 
-bool Blackjack::complete()
+void Blackjack::completeRound()
 {
 	playDealer();
-
-	int playerScore = calculateScore(m_player);
-	int dealerScore = calculateScore(m_dealer);
-
-	if (playerScore == 21 || dealerScore > 21 || playerScore > dealerScore)
-		return true;
-
-	return false;
+	m_dealer.setScore(calculateScore(m_dealer));
 }
 
 Card Blackjack::getDealerShowCard() const
@@ -49,14 +50,16 @@ Card Blackjack::getDealerShowCard() const
 	return m_dealer.getHand()[0];
 }
 
-const std::vector<Card>& Blackjack::getPlayerHand() const
+const std::vector<Card>& Blackjack::getPlayerHand(int playerIndex) const
 {
-	return m_player.getHand();
+	auto player = m_players.at(playerIndex);
+	return player.getHand();
 }
 
-int Blackjack::getPlayerScore() const
+int Blackjack::getPlayerScore(int playerIndex) const
 {
-	return calculateScore(m_player);
+	auto player = m_players.at(playerIndex);
+	return calculateScore(player);
 }
 
 const std::vector<Card>& Blackjack::getDealerHand() const
@@ -67,6 +70,19 @@ const std::vector<Card>& Blackjack::getDealerHand() const
 int Blackjack::getDealerScore() const
 {
 	return calculateScore(m_dealer);
+}
+
+bool Blackjack::hit(Player& player)
+{
+	assert(calculateScore(player) < 22);
+
+	player.dealCard(m_deck.deal());
+	return calculateScore(player) < 22;
+}
+
+bool Blackjack::nextPlayer()
+{
+	return ++m_activePlayer != m_players.end();
 }
 
 void Blackjack::dealCard(Player& player)
@@ -100,7 +116,9 @@ void Blackjack::playDealer()
 void Blackjack::resetHands()
 {
 	m_dealer.resetHand();
-	m_player.resetHand();
+
+	for (auto player : m_players)
+		player.resetHand();
 }
 
 void Blackjack::reshuffleDeck()
@@ -121,4 +139,9 @@ int Blackjack::scoreWithAces(int numberOfAces, int initialScore) const
 	}
 
 	return result;
+}
+
+bool Blackjack::playerWins(int playerScore, int dealerScore) const
+{
+	return (playerScore == 21 || dealerScore > 21 || playerScore > dealerScore);
 }

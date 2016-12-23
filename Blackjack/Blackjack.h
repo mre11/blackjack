@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 
 #include "Player.h"
 #include "Deck.h"
@@ -10,27 +11,32 @@ class Blackjack
 public:
 	Blackjack();
 
+	void addPlayer();
 	void deal();
-	bool hit(); // returns true if the Player has not busted	
-	bool complete(); // returns true if the Player wins the game
+	bool hit(); // returns true if the Player has not busted
+	void stay();
+	void completeRound(); // returns true if the Player wins the game
 
 	Card getDealerShowCard() const;
-	const std::vector<Card>& getPlayerHand() const;
-	int getPlayerScore() const;
+	const std::vector<Card>& getPlayerHand(int playerIndex) const;
+	int getPlayerScore(int playerIndex) const;
 	const std::vector<Card>& getDealerHand() const;
 	int getDealerScore() const;
 
 private:
 	bool hit(Player& player);
+	bool nextPlayer();
 	void dealCard(Player& player);
 	int calculateScore(const Player& player) const;
 	void playDealer();
 	void resetHands();
 	void reshuffleDeck();
 	int scoreWithAces(int numberOfAces, int initialScore) const;
+	bool playerWins(int playerScore, int dealerScore) const;
 
-	Player m_dealer;
-	Player m_player;
 	Deck m_deck;
+	Player m_dealer;
+	std::vector<Player> m_players;
+	std::vector<Player>::iterator m_activePlayer;
 };
 

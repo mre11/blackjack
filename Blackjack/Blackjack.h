@@ -26,7 +26,7 @@ private:
 	int calculateScore(const Player& player) const;
 	void playDealer();
 	void resetHands();
-	void resetDeck();
+	void reshuffleDeck();
 	int scoreWithAces(int numberOfAces, int initialScore) const;
 
 	Player m_dealer;

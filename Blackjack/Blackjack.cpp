@@ -10,8 +10,7 @@ void Blackjack::deal()
 {
 	resetHands();
 
-	if (m_deck.count() < 15)
-		resetDeck(); // reshuffle
+	reshuffleDeck();
 
 	m_player.dealCard(m_deck.deal());
 	m_dealer.dealCard(m_deck.deal());
@@ -104,7 +103,7 @@ void Blackjack::resetHands()
 	m_player.resetHand();
 }
 
-void Blackjack::resetDeck()
+void Blackjack::reshuffleDeck()
 {
 	m_deck.reset();
 }

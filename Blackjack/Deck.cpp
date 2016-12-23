@@ -12,7 +12,7 @@ Deck::Deck()
 
 void Deck::shuffle()
 {
-	srand(time(0));
+	srand(static_cast<unsigned int>(time(0)));
 	random_shuffle(m_cards.begin(), m_cards.end());
 }
 
@@ -31,7 +31,7 @@ void Deck::reset()
 
 int Deck::count()
 {
-	return m_cards.end() - m_nextCard;
+	return static_cast<int>(m_cards.end() - m_nextCard);
 }
 
 void Deck::initStandardDeck()

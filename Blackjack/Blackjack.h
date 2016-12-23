@@ -27,6 +27,7 @@ private:
 	void playDealer();
 	void resetHands();
 	void resetDeck();
+	int scoreWithAces(int numberOfAces, int initialScore) const;
 
 	Player m_dealer;
 	Player m_player;

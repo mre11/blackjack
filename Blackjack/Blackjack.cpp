@@ -78,12 +78,18 @@ void Blackjack::dealCard(Player& player)
 int Blackjack::calculateScore(const Player& player) const
 {
 	int score = 0;
+	int aceCount = 0;
+
+	// get the score before aces, and count the aces
 	for (auto card : player.getHand())
 	{
-		score += card.getPointValue();
+		if (card.getRank() == 0)
+			aceCount++;
+		else
+			score += card.getPointValue();
 	}
 
-	return score;
+	return scoreWithAces(aceCount, score);
 }
 
 void Blackjack::playDealer()
@@ -101,4 +107,19 @@ void Blackjack::resetHands()
 void Blackjack::resetDeck()
 {
 	m_deck.reset();
+}
+
+int Blackjack::scoreWithAces(int numberOfAces, int initialScore) const
+{
+	int result = initialScore;
+
+	for (int i = 0; i < numberOfAces; i++)
+	{
+		if (result < 11)
+			result += 11;
+		else
+			result++;
+	}
+
+	return result;
 }

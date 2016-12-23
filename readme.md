@@ -1,1 +1,1 @@
-This is a simple Blackjack card came program.
+A simple blackjack card game program.

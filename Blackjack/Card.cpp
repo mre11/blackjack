@@ -33,7 +33,7 @@ string Card::getSuitString() const
 		case 3:
 			return "S";
 		default:
-			return "Unknown";
+			return "?";
 	}
 }
 

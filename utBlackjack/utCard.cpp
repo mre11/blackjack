@@ -21,3 +21,23 @@ TEST(TestCard, SuitRankConstructor)
 	EXPECT_EQ("4", c.getRankString());
 	EXPECT_EQ("D", c.getSuitString());
 }
+
+TEST(TestCard, UnknownCard1)
+{
+	Card c(-1, -1);
+
+	EXPECT_EQ(-1, c.getRank());
+	EXPECT_EQ(-1, c.getSuit());
+	EXPECT_EQ("?", c.getRankString());
+	EXPECT_EQ("?", c.getSuitString());
+}
+
+TEST(TestCard, UnknownCard2)
+{
+	Card c(42, 42);
+
+	EXPECT_EQ(42, c.getRank());
+	EXPECT_EQ(42, c.getSuit());
+	EXPECT_EQ("?", c.getRankString());
+	EXPECT_EQ("?", c.getSuitString());
+}

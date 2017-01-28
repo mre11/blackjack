@@ -107,10 +107,18 @@ int Blackjack::calculateScore(const Player& player) const
 		if (card.getRank() == 0)
 			aceCount++;
 		else
-			score += card.getPointValue();
+			score += getPointValue(card);
 	}
 
 	return scoreWithAces(aceCount, score);
+}
+
+int Blackjack::getPointValue(const Card & card) const
+{
+	if (card.getRank() > 9)
+		return 10;
+
+	return card.getRank() + 1;
 }
 
 void Blackjack::playDealer()

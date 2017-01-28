@@ -11,7 +11,6 @@ public:
 
 	int getSuit() const;
 	int getRank() const;
-	int getPointValue() const;
 
 	std::string getSuitString() const;
 	std::string getRankString() const;

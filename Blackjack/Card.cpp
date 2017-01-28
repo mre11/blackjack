@@ -20,14 +20,6 @@ int Card::getRank() const
 	return m_rank;
 }
 
-int Card::getPointValue() const
-{
-	if (m_rank > 9)
-		return 10;
-
-	return m_rank + 1;
-}
-
 string Card::getSuitString() const
 {
 	switch (m_suit)

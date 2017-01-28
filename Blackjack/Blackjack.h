@@ -5,6 +5,7 @@
 
 #include "Player.h"
 #include "Deck.h"
+#include "Card.h"
 
 class Blackjack
 {
@@ -29,6 +30,7 @@ private:
 	bool nextPlayer();
 	void dealCard(Player& player);
 	int calculateScore(const Player& player) const;
+	int getPointValue(const Card& card) const;
 	void playDealer();
 	void resetHands();
 	void reshuffleDeck();

@@ -23,7 +23,7 @@ void runGame(int numberOfPlayers)
 		{
 			auto playerInitialHand = game.getActivePlayerHand();
 			cout << "==========================================" << endl;
-			cout << "Player " << i + 1 << " hand: " << playerInitialHand[0] << " " << playerInitialHand[1] << endl << endl;
+			cout << "Player " << i + 1 << " hand: " << playerInitialHand[0] << " and " << playerInitialHand[1] << endl << endl;
 
 			if (game.getActivePlayerScore() == 21)
 			{

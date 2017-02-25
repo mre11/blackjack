@@ -1,2 +1,2 @@
-bin\x64\Debug\utBlackjack.exe
+%~dp0bin\x64\Debug\utBlackjack.exe
 pause

@@ -2,65 +2,69 @@
 
 using namespace std;
 
-Card::Card() : m_suit(3), m_rank(0)
+Card::Card() : m_suit(Suit::Spades), m_rank(Rank::Ace)
 {
 }
 
-Card::Card(int suit, int rank) : m_suit(suit), m_rank(rank)
+Card::Card(Suit suit, Rank rank) : m_suit(suit), m_rank(rank)
 {
 }
 
-int Card::getSuit() const
+Suit Card::getSuit() const
 {
 	return m_suit;
 }
 
-int Card::getRank() const
+Rank Card::getRank() const
 {
 	return m_rank;
 }
 
 string Card::getSuitString() const
 {
-	switch (m_suit)
-	{
-		case 0:
-			return "H";
-		case 1:
-			return "D";
-		case 2:
-			return "C";
-		case 3:
-			return "S";
-		default:
-			return "?";
-	}
+	return suitToString(m_suit);
 }
 
 string Card::getRankString() const
 {
-	if (m_rank > 0 && m_rank < 10)
-	{
-		return to_string(m_rank + 1);
-	}
+	return rankToString(m_rank);
+}
 
-	switch (m_rank)
+string Card::suitToString(Suit suit) const
+{
+	switch (suit)
 	{
-		case 0:
-			return "A";
-		case 10:
-			return "J";
-		case 11:
-			return "Q";
-		case 12:
-			return "K";
-		default:
-			return "?";
+		case Suit::Hearts: return "Hearts";
+		case Suit::Diamonds: return "Diamonds";
+		case Suit::Clubs: return "Clubs";
+		case Suit::Spades: return "Spades";
+		default: return "?";
+	}
+}
+
+string Card::rankToString(Rank rank) const
+{
+	switch (rank)
+	{
+		case Rank::Ace: return "Ace";
+		case Rank::Two: return "Two";
+		case Rank::Three: return "Three";
+		case Rank::Four: return "Four";
+		case Rank::Five: return "Five";
+		case Rank::Six: return "Six";
+		case Rank::Seven: return "Seven";
+		case Rank::Eight: return "Eight";
+		case Rank::Nine: return "Nine";
+		case Rank::Ten: return "Ten";
+		case Rank::Jack: return "Jack";
+		case Rank::Queen: return "Queen";
+		case Rank::King: return "King";
+		default: return "?";
 	}
 }
 
 ostream& operator<<(ostream& os, const Card& card)
 {
-	os << card.getRankString() << card.getSuitString();
+	os << card.getRankString() << " of " << card.getSuitString();
 	return os;
 }

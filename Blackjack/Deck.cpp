@@ -37,9 +37,9 @@ void Deck::initStandardDeck()
 {
 	m_cards.clear();
 
-	for (int suit = 0; suit < 4; suit++)
+	for (auto suit : SUITS)
 	{
-		for (int rank = 0; rank < 13; rank++)
+		for (auto rank : RANKS)
 		{
 			m_cards.push_back(Card(suit, rank));
 		}

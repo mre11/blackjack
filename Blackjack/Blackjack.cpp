@@ -104,7 +104,7 @@ int Blackjack::calculateScore(const Player& player) const
 	// get the score before aces, and count the aces
 	for (auto card : player.getHand())
 	{
-		if (card.getRank() == 0)
+		if (card.getRank() == Rank::Ace)
 			aceCount++;
 		else
 			score += getPointValue(card);
@@ -113,12 +113,27 @@ int Blackjack::calculateScore(const Player& player) const
 	return scoreWithAces(aceCount, score);
 }
 
-int Blackjack::getPointValue(const Card & card) const
+int Blackjack::getPointValue(const Card& card) const
 {
-	if (card.getRank() > 9)
-		return 10;
-
-	return card.getRank() + 1;
+	auto rank = card.getRank();
+	switch (rank)
+	{
+		case Rank::Ace: return 1;
+		case Rank::Two: return 2;
+		case Rank::Three: return 3;
+		case Rank::Four: return 4;
+		case Rank::Five: return 5;
+		case Rank::Six: return 6;
+		case Rank::Seven: return 7;
+		case Rank::Eight: return 8;
+		case Rank::Nine: return 9;
+		case Rank::Ten:
+		case Rank::Jack:
+		case Rank::Queen:
+		case Rank::King:
+			return 10;
+		default: return 0;
+	}
 }
 
 void Blackjack::playDealer()

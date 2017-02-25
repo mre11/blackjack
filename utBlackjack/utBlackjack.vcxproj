@@ -88,6 +88,9 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\Blackjack</AdditionalIncludeDirectories>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>$(SolutionDir)testAll.bat</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -115,6 +118,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PostBuildEvent>
+      <Command>$(SolutionDir)testAll.bat</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="packages.config" />

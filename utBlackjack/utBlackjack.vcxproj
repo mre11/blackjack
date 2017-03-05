@@ -89,7 +89,7 @@
       <AdditionalIncludeDirectories>..\Blackjack</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
-      <Command>$(SolutionDir)testAll.bat</Command>
+      <Command>$(SolutionDir)testAll.bat -d</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

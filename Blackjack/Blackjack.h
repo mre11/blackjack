@@ -23,7 +23,7 @@ public:
 	const std::vector<Card>& getActivePlayerHand() const;
 	int getDealerScore() const;
 	int getActivePlayerScore() const;
-	bool playerWins(int playerIndex);
+	int payout(unsigned int playerIndex) const;
 
 private:
 	bool hit(Player& player);
@@ -35,7 +35,9 @@ private:
 	void resetHands();
 	void reshuffleDeck();
 	int scoreWithAces(int numberOfAces, int initialScore) const;
+	bool playerWins(const Player& player) const;
 	bool playerWins(int playerScore, int dealerScore) const;
+	int payout(const Player& player) const;
 
 	Deck m_deck;
 	Player m_dealer;

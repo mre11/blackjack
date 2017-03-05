@@ -4,11 +4,11 @@
 
 using namespace std;
 
-void runGame(int numberOfPlayers)
+void runGame(unsigned int numberOfPlayers)
 {
 	Blackjack game;
 
-	for (int i = 0; i < numberOfPlayers; i++)
+	for (unsigned int i = 0; i < numberOfPlayers; i++)
 		game.addPlayer();
 
 	cout << "Note: enter \"q\" to quit." << endl;
@@ -19,7 +19,7 @@ void runGame(int numberOfPlayers)
 
 		cout << "Dealer shows " << game.getDealerShowCard() << endl << endl;
 
-		for (int i = 0; i < numberOfPlayers; i++) // loop for each player
+		for (unsigned int i = 0; i < numberOfPlayers; i++) // loop for each player
 		{
 			auto playerInitialHand = game.getActivePlayerHand();
 			cout << "==========================================" << endl;
@@ -62,8 +62,6 @@ void runGame(int numberOfPlayers)
 			}
 		}
 
-		game.completeRound();
-
 		cout << "Dealer hand is ";
 		for (auto card : game.getDealerHand())
 		{
@@ -73,12 +71,13 @@ void runGame(int numberOfPlayers)
 		cout << "Dealer score is " << game.getDealerScore() << endl << endl;
 
 		// notify players if won
-		for (int i = 0; i < numberOfPlayers; i++)
+		for (unsigned int i = 0; i < numberOfPlayers; i++)
 		{
 			cout << "Player " << i + 1 << ": ";
 
-			if (game.playerWins(i))
-				cout << "You Win!" << endl;
+			int payout = game.payout(i);
+			if (payout > 0)
+				cout << "You Win! Payout is $" << payout << endl;
 			else
 				cout << "You Lose :(" << endl;
 		}

@@ -22,7 +22,10 @@ void Blackjack::deal()
 	for (int i = 0; i < 2; i++)
 	{
 		for (Player& player : m_players)
+		{
+			player.bet(1);
 			player.dealCard(m_deck.deal());
+		}
 
 		m_dealer.dealCard(m_deck.deal());
 	}
@@ -45,6 +48,9 @@ void Blackjack::completeRound()
 {
 	playDealer();
 	m_dealer.setScore(calculateScore(m_dealer));
+
+	for (auto& player : m_players)
+		player.pay(payout(player));
 }
 
 Card Blackjack::getDealerShowCard() const
@@ -72,10 +78,9 @@ int Blackjack::getActivePlayerScore() const
 	return calculateScore(*m_activePlayer);
 }
 
-bool Blackjack::playerWins(int playerIndex)
+int Blackjack::payout(unsigned int playerIndex) const
 {
-	auto player = m_players.at(playerIndex);
-	return playerWins(player.getScore(), m_dealer.getScore());
+	return payout(m_players[playerIndex]);
 }
 
 bool Blackjack::hit(Player& player)
@@ -101,7 +106,7 @@ int Blackjack::calculateScore(const Player& player) const
 	int score = 0;
 	int aceCount = 0;
 
-	// get the score before aces, and count the aces
+	// get the score without aces, and count the aces
 	for (auto card : player.getHand())
 	{
 		if (card.getRank() == Rank::Ace)
@@ -170,7 +175,20 @@ int Blackjack::scoreWithAces(int numberOfAces, int initialScore) const
 	return result;
 }
 
+bool Blackjack::playerWins(const Player& player) const
+{
+	return playerWins(player.getScore(), m_dealer.getScore());
+}
+
 bool Blackjack::playerWins(int playerScore, int dealerScore) const
 {
 	return playerScore < 22 && (playerScore == 21 || dealerScore > 21 || playerScore > dealerScore);
+}
+
+int Blackjack::payout(const Player& player) const
+{
+	if (playerWins(player))
+		return player.getCurrentBet() * 2;
+
+	return 0;
 }

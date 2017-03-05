@@ -31,4 +31,3 @@ TEST(TestCard, UnknownCard1)
 	EXPECT_EQ("?", c.getRankString());
 	EXPECT_EQ("?", c.getSuitString());
 }
-

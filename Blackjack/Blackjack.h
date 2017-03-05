@@ -44,4 +44,3 @@ private:
 	std::vector<Player> m_players;
 	std::vector<Player>::iterator m_activePlayer;
 };
-

@@ -20,4 +20,3 @@ private:
 	std::vector<Card> m_cards;
 	std::vector<Card>::iterator m_nextCard;
 };
-

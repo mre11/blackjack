@@ -26,4 +26,3 @@ private:
 	int m_chips;
 	int m_currentBet;
 };
-

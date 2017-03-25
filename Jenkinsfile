@@ -4,7 +4,7 @@ node {
 		checkout scm
 
 	stage 'build'
-		bat "MSBuild.exe Blackjack.sln /p:Configuration=Release /p:Platform=\"x64\""
+		bat "\"${tool 'MSBuild'}\" Blackjack.sln /p:Configuration=Release /p:Platform=\"x64\""
 
 	stage 'test'
 		bat "./bin/x64/Release/utBlackjack.exe"

@@ -1,11 +1,11 @@
 #pragma once
 
-#include <vector>
-#include <memory>
-
 #include "Player.h"
 #include "Deck.h"
 #include "Card.h"
+
+#include <vector>
+#include <memory>
 
 class Blackjack
 {

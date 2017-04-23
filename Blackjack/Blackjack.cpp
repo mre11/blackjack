@@ -21,7 +21,7 @@ void Blackjack::deal()
 
 	for (int i = 0; i < 2; i++)
 	{
-		for (Player& player : m_players)
+		for (auto& player : m_players)
 		{
 			player.bet(1);
 			player.dealCard(m_deck.deal());

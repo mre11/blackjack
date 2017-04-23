@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Card.h"
+
 #include <vector>
 #include <memory>
-
-#include "Card.h"
 
 class Player
 {

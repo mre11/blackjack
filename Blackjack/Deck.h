@@ -1,8 +1,8 @@
 #pragma once
 
-#include <vector>
-
 #include "Card.h"
+
+#include <vector>
 
 class Deck
 {
